@@ -17,35 +17,39 @@ Define the absolute path(s) you will be using to connect the *.m files to the ex
 
 let 
 // Storage Definition - If you need to constantly change sources for this system, create a variable for the absolute path
-    cloudMac = "\\Mac\iCloud\Data Analysis\Projects\Inventory Management System\Inventory-Management-System\",
+cloudMac = "\\Mac\iCloud\Data Analysis\Projects\Inventory Management System\Inventory-Management-System\",
 
 // Folder Definition
-    // *.csv
-    csvFolder = "Data\1.0 CSV\",
+// *.csv
+csv = "Data\1.0 CSV\",
 
-    // Global
-    GlobalFolder = "Source\0.0 Global\",
+// Global Layer
+Global = "Source\0.0 Global\",
 
-    // Data Layers
-    BronzeLayerFolder ="Source\1.0 Bronze Layer\",
-    SilverLayerFolder = "Source\2.0 Silver Layer\",
-    GoldLayerFolder = "Source\3.0 Gold Layer\",
+// Data Layers
+Bronze ="Source\1.0 Bronze\",
+Silver = "Source\2.0 Silver\",
+Gold = "Source\3.0 Gold\",
 
 // Evaluation Formulas
-    evalFolder = (folder) => Folder.Contents(folder),
-    evalFile = (file) => Expression.Evaluate(Text.FromBinary(File.Contents(file)),#shared),
+evalFolder = (folder) => Folder.Contents(folder),
+evalFile = (file) => Expression.Evaluate(Text.FromBinary(File.Contents(file)),#shared),
 
-// Project Objects
-    Objects = (path) =>
-    [
-        // *.csv Files
-        csv_PurchaseOrders = evalFolder(Text.Combine({path, csvFolder,"Purchase Orders"})),
 
-        // Global Files
-        Lists = evalFile(Text.Combine({path,GlobalFolder,"0.2 Lists.m"})),
-        Variables = evalFile(Text.Combine({path, GlobalFolder,"0.3 Variables.m"})),
-        Functions = evalFile(Text.Combine({path, GlobalFolder,"0.4 Functions.m"}))
-    ]
+Objects = (path) =>
+[
+    // *.csv Files
+    csv_PurchaseOrders = evalFolder(Text.Combine({path, csv,"Purchase Orders"})),
+
+    // Global Files
+    Lists = evalFile(Text.Combine({path,Global,"0.2 Lists.m"})),
+    Variables = evalFile(Text.Combine({path, Global,"0.3 Variables.m"})),
+    Functions = evalFile(Text.Combine({path, Global,"0.4 Functions.m"})),
+
+    // Bronze Layer
+    brz_Import = evalFile(Text.Combine({path, Bronze,"1.1 brz_Import.m"})),
+    brz_Extract = evalFile(Text.Combine({path, Bronze,"1.2 brz_Extract.m"}))
+]
     
 in 
     Objects(cloudMac)
