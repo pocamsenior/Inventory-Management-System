@@ -48,7 +48,11 @@ Objects = (path) =>
 
     // Bronze Layer
     brz_Import = evalFile(Text.Combine({path, Bronze,"1.1 brz_Import.m"})),
-    brz_Extract = evalFile(Text.Combine({path, Bronze,"1.2 brz_Extract.m"}))
+    brz_Extract = evalFile(Text.Combine({path, Bronze,"1.2 brz_Extract.m"})),
+
+    // Silver Layer
+    slv_Clean = evalFile(Text.Combine({path, Silver,"2.1 slv_Clean.m"}))
+
 ]
     
 in 
