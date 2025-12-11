@@ -1,6 +1,6 @@
 /* 
 ===================================================
-Bronze Layer - Preliminary Cleaning
+Silver Layer - Preliminary Cleaning
 ===================================================
 # Script Definition
 This script performs a general preliminary cleaning of all tables from the bronze extract record
