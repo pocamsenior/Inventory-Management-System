@@ -1,9 +1,9 @@
 /* 
 ===================================================
-Bronze Layer - Import CSV Files
+Bronze Layer - Extract Tables
 ===================================================
 # Script Definition
-This script creates a combined record for all csv files in the data folder
+This script creates a combined record for all csv files in the data folder as tables
 ===================================================
 */
 
@@ -21,15 +21,15 @@ combineTables = (tbl as table) => Table.Combine(tbl[Content]),
 
 extractTables = (files as record) => 
 let
+    // Variables
     lstRecordFields = Record.FieldNames(files),
     lstFiles = Record.ToList(files),
 
-
+    // Queries
     #"Combine Tables" = List.Transform(lstFiles, each combineTables(_)),
     #"Transform List to Record" = Record.FromList(#"Combine Tables",lstRecordFields)
-
 in
-#"Transform List to Record"
+    #"Transform List to Record"
 
 in
 extractTables(brz_Import)
