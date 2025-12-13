@@ -35,7 +35,6 @@ Gold = "Source\3.0 Gold\",
 evalFolder = (folder) => Folder.Contents(folder),
 evalFile = (file) => Expression.Evaluate(Text.FromBinary(File.Contents(file)),#shared),
 
-
 Objects = (path) =>
 [
     // *.csv Files
@@ -53,7 +52,7 @@ Objects = (path) =>
     // Silver Layer
     slv_Clean = evalFile(Text.Combine({path, Silver,"2.1 slv_Clean.m"})),
     slv_dimTables = evalFile(Text.Combine({path, Silver,"2.2 slv_dimTables.m"})),
-    slv_factTables = evalFile(Text.Combine({path, Silver,"2.2 slv_factTables.m"}))
+    slv_factTables = evalFile(Text.Combine({path, Silver,"2.3 slv_factTables.m"}))
 
 ]
     
