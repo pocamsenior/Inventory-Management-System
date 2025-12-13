@@ -10,11 +10,12 @@ This script creates a combined record for all csv files in the data folder as ta
 let
 // Global Definitions
 Objects = #shared[Objects],
+brz_Import = Objects[brz_Import],
+
 Lists = [Objects][Lists],
 Variables = Objects[Variables],
 Functions = Objects[Functions],
 
-brz_Import = Objects[brz_Import],
 
 // Local Definitions
 combineTables = (tbl as table) => Table.Combine(tbl[Content]),
