@@ -36,7 +36,8 @@ lstFunctions_AggregatedHyperlink = List.Transform(lstRenameColumns_Agregated_Pur
         each List.Last(List.RemoveNulls(Record.Field(_,lstColumns_Aggregated_PurchaseOrders{posListItem})))),
 nlstTransformations_Aggregations = List.Zip({lstRenameColumns_Agregated_PurchaseOrders, lstFunctions_AggregatedHyperlink}),
 
-dimProducts =
+// Tables
+slv_dimProducts =
 [
     #"Aggregate Products" = Table.Group(slv_PurchaseOrders, lstKeyColumns_dimProducts, nlstTransformations_Aggregations),
     #"Add Product Id" = Table.AddIndexColumn(#"Aggregate Products",txtIdColumn_dimProducts, 1,1, Int64.Type),
@@ -44,6 +45,6 @@ dimProducts =
 ]
 
 in
-[
-    dimProducts = dimProducts[Final Output]
-]
+    [
+        dimProducts = slv_dimProducts[Final Output]
+    ]

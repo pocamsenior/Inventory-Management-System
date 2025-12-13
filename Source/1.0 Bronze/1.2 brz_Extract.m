@@ -13,24 +13,35 @@ Objects = #shared[Objects],
 brz_Import = Objects[brz_Import],
 
 Lists = [Objects][Lists],
-Variables = Objects[Variables],
-Functions = Objects[Functions],
 
+Variables = Objects[Variables],
+
+Functions = Objects[Functions],
+posText_List = Functions[posText_List],
 
 // Local Definitions
-combineTables = (tbl as table) => Table.Combine(tbl[Content]),
-
 extractTables = (files as record) => 
-let
-    // Variables
-    lstRecordFields = Record.FieldNames(files),
-    lstFiles = Record.ToList(files),
+    let
+        // Variables
+        lstRecordFields = Record.FieldNames(files),
+        lstFiles = Record.ToList(files),
 
-    // Queries
-    #"Combine Tables" = List.Transform(lstFiles, each combineTables(_)),
-    #"Transform List to Record" = Record.FromList(#"Combine Tables",lstRecordFields)
-in
-    #"Transform List to Record"
+        // Queries
+        #"Partition by Year" = List.Transform(lstFiles, each 
+        let
+            lstTables = _[Content],
+            lstYears = List.Transform(_[Name], each Text.BeforeDelimiter(_,"_"))
+        in
+            List.Transform(lstTables, (item) => 
+            let
+                position = List.PositionOf(lstTables,item)
+            in
+                Table.AddColumn(item,"Partition Year", each lstYears{position})) 
+        ),
+        #"Combine Tables" = List.Transform(#"Partition by Year", each Table.Combine(_)),
+        #"Transform List to Record" = Record.FromList(#"Combine Tables",lstRecordFields)
+    in
+        #"Transform List to Record"
 
 in
-extractTables(brz_Import)
+    extractTables(brz_Import)
