@@ -29,7 +29,7 @@ updateDataTypes = Functions[updateDataTypes],
 
 // Local Definitions
 lstColumns_factOrders = filterList(Table.ColumnNames(factOrders[Add Order Id]), {{"Order","Id","Quantity"},{null}}),
-lstColumns_factProductHealth = filterList(filterList(Table.ColumnNames(factProductHealth[Fill Missing Data]), {{"Date","Product","Health","Consumed","Comment","Type","Total","Discarded"},{"Hyperlink","Price","Id"}}),{{null},{"Product Quantity"}}),
+lstColumns_factProductHealth = filterList(Table.ColumnNames(factProductHealth[Fill Missing Data]), {{"Date","Health","Consumed","Comment","Type","Total","Discarded","Id"},{"Hyperlink","Price"}}),
 txtColumn_EntryType = "Entry Type",
 
 sortYearDateProductId = (tbl) => 
