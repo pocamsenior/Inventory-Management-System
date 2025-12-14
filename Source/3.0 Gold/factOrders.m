@@ -19,7 +19,7 @@ filterList = Functions[filterList],
 reorderColumns = Functions[reorderColumns],
 fillMissingData = Functions[fillMissingData],
 
-#"Reorder Columns" = reorderColumns(factOrders,{1,2,3,4,0}),
+#"Reorder Columns" = reorderColumns(factOrders,{0,2,3,4,3.1,1}),
 #"Fill Mising Data" = fillMissingData(#"Reorder Columns",{{"Supplier"},{null}})
 
 in

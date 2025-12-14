@@ -28,7 +28,7 @@ filterList = Functions[filterList],
 updateDataTypes = Functions[updateDataTypes],
 
 // Local Definitions
-lstColumns_factOrders = filterList(Table.ColumnNames(factOrders[Add Order Id]), {{"Order","Id","Quantity"},{null}}),
+lstColumns_factOrders = filterList(Table.ColumnNames(factOrders[Add Order Id]), {{"Order","Id","Quantity","Date"},{null}}),
 lstColumns_factProductHealth = filterList(Table.ColumnNames(factProductHealth[Fill Missing Data]), {{"Date","Health","Consumed","Comment","Type","Total","Discarded","Id"},{"Hyperlink","Price"}}),
 txtColumn_EntryType = "Entry Type",
 
