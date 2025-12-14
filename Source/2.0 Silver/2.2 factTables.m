@@ -68,7 +68,13 @@ factProductHealth =
         in
             #"Add Type Column",
 
-    #"Create New Inventory Check Entry Table" = Table.AddColumn(InventoryChecks, txtColumn_EntryType, each "Inventory Check"),
+    #"Create New Inventory Check Entry Table" = 
+        let
+            #"Join dimProducts" = Table.Join(InventoryChecks, lstKeyColumns_dimProducts, dimProducts, lstKeyColumns_dimProducts, JoinKind.Inner),
+            #"Add Type Column" = Table.AddColumn(#"Join dimProducts", txtColumn_EntryType, each "Inventory Check")
+        in
+            #"Add Type Column",
+
 
     #"Combine Purchase Orders and Inventory Checks" = Table.Combine({#"Create New Purchase Order Entry Table", #"Create New Inventory Check Entry Table"}),
 
