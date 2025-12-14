@@ -10,7 +10,7 @@ This script creates a combined record for all csv files in the data folder as ta
 let
 // Global Definitions
 Objects = #shared[Objects],
-brz_Import = Objects[brz_Import],
+Import = Objects[Import],
 
 Lists = [Objects][Lists],
 
@@ -44,4 +44,4 @@ extractTables = (files as record) =>
         #"Transform List to Record"
 
 in
-    extractTables(brz_Import)
+    extractTables(Import)

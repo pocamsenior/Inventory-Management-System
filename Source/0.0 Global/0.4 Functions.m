@@ -65,7 +65,7 @@ Functions =
     reorderColumns = (tbl as table, order as list) =>
         let
             lstColumns = Table.ColumnNames(tbl),
-            lstColumns_Table = List.Transform(lstColumns, each 
+            lstColumns_TableFromList = List.Transform(lstColumns, each 
                 let 
                     position = posText_List(lstColumns,_),
                     position_Initial = Text.From(position),
@@ -73,16 +73,30 @@ Functions =
                 in
                     Text.Combine ({_,position_Initial,position_Final},",")),
 
-            lstHelperColumns_Tables = {"Column Name","Initial Position","Final Position"},
+            lstHelperColumns = {"Column Name","Initial Position","Final Position"},
             lstHelperColumns_DataTypes = {Text.Type, Int64.Type, Number.Type},
-            nlstTransformations_HelperColumns = List.Zip({lstHelperColumns_Tables,lstHelperColumns_DataTypes}),
+            nlstTransformations_HelperColumns = List.Zip({lstHelperColumns,lstHelperColumns_DataTypes}),
 
-            tblColumns = Table.FromList(lstColumns_Table,null,lstHelperColumns_Tables),
-            tblColumns_UpdatedDataTypes = Table.TransformColumnTypes(tblColumns,nlstTransformations_HelperColumns),
+            tblColumnOrder = Table.FromList(lstColumns_TableFromList,null,lstHelperColumns),
+            tblColumnOrder_DataTypes = Table.TransformColumnTypes(tblColumnOrder,nlstTransformations_HelperColumns),
 
-            #"Sort Table" = Table.Sort(tblColumns_UpdatedDataTypes,{{lstHelperColumns_Tables{2},Order.Ascending},{lstHelperColumns_Tables{1},Order.Ascending}})
+            #"Sort Table" = Table.Sort(tblColumnOrder_DataTypes,{{lstHelperColumns{2},Order.Ascending},{lstHelperColumns{1},Order.Ascending}})
         in
-            Table.ReorderColumns(tbl,#"Sort Table"[Column Name])
+            Table.ReorderColumns(tbl,#"Sort Table"[Column Name]),
+
+    fillMissingData = (tbl as table, nlstFilter as list) =>
+        let
+            lstColumns_Null = filterList(Table.ColumnNames(tbl), nlstFilter),
+            lstFunctions_Null = List.Transform(
+                List.Transform(lstColumns_Null, each
+                    if List.AnyTrue(List.Transform({"Variant","Model","Size"}, (value) => Text.Contains(_, value))) then "Not Applicable"
+                    else if List.AnyTrue(List.Transform({"Brand"}, (value) => Text.Contains(_, value))) then "Not Available" 
+                    else if List.AnyTrue(List.Transform({"Hyperlink","Supplier","Comment"}, (value) => Text.Contains(_, value))) then "Not Provided" 
+                    else null), 
+                each (value) => value ?? _),
+            nlstTransformations = List.Zip({lstColumns_Null,lstFunctions_Null})
+        in
+            Table.TransformColumns(tbl, nlstTransformations)
 ]
 in
     Functions

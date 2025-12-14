@@ -13,15 +13,15 @@ This script performs a general preliminary cleaning of all tables from the bronz
 let
 // Global Definitions
 Objects = #shared[Objects],
-brz_Extract = Objects[brz_Extract],
+Extract = Objects[Extract],
 
 Lists = [Objects][Lists],
 
 Variables = Objects[Variables],
 
 Functions = Objects[Functions],
-updateDataTypes = Functions[updateDataTypes],
 filterList = Functions[filterList],
+updateDataTypes = Functions[updateDataTypes],
 
 // Local Definitions
 cleanTable = (tbl as table) =>
@@ -40,7 +40,7 @@ cleanTable = (tbl as table) =>
     in
         #"Update Data Types",
 
-updateRecords = (rec as record) =>
+cleanRecords = (rec as record) =>
     let
         // Variables
         lstRecordFieldNames = Record.FieldNames(rec),
@@ -53,4 +53,4 @@ updateRecords = (rec as record) =>
         #"Transform List to Record"
 
 in
-    updateRecords(brz_Extract)
+    cleanRecords(Extract)

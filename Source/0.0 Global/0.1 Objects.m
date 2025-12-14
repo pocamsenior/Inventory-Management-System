@@ -48,13 +48,19 @@ Objects = (path) =>
     Functions = evalFile(Text.Combine({path, Global,"0.4 Functions.m"})),
 
     // Bronze Layer
-    brz_Import = evalFile(Text.Combine({path, Bronze,"1.1 brz_Import.m"})),
-    brz_Extract = evalFile(Text.Combine({path, Bronze,"1.2 brz_Extract.m"})),
+    Import = evalFile(Text.Combine({path, Bronze,"1.1 Import.m"})),
+    Extract = evalFile(Text.Combine({path, Bronze,"1.2 Extract.m"})),
 
     // Silver Layer
-    slv_Clean = evalFile(Text.Combine({path, Silver,"2.1 slv_Clean.m"})),
-    slv_dimTables = evalFile(Text.Combine({path, Silver,"2.2 slv_dimTables.m"})),
-    slv_factTables = evalFile(Text.Combine({path, Silver,"2.3 slv_factTables.m"}))
+    prelimClean = evalFile(Text.Combine({path, Silver,"2.1 Preliminary Clean.m"})),
+    dimTables = evalFile(Text.Combine({path, Silver,"2.2 dimTables.m"})),
+    factTables = evalFile(Text.Combine({path, Silver,"2.2 factTables.m"})),
+
+    // Gold Layer
+    dimProducts = evalFile(Text.Combine({path, Gold,"dimProducts.m"})),
+    factOrders = evalFile(Text.Combine({path, Gold,"factOrders.m"})),
+    factProductHealth = evalFile(Text.Combine({path, Gold,"factProductHealth.m"})),
+    factPurchaseRequests = evalFile(Text.Combine({path, Gold,"factPurchaseRequests.m"}))
 
 ]
     

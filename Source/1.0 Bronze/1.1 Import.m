@@ -44,7 +44,7 @@ importTables = (files as record) =>
     in
         #"Transform List to Record",
 
-brz_Import =
+Import =
 [
     PurchaseOrders = csv_PurchaseOrders,
     InventoryChecks = csv_InventoryChecks,
@@ -52,4 +52,4 @@ brz_Import =
 ]
 
 in
-    importTables(brz_Import)
+    importTables(Import)

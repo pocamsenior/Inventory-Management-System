@@ -10,12 +10,13 @@ This script contains variables that can be used throughout the source folder.
 let
 // Global Definitions
 Objects = #shared[Objects],
-slv_Clean = Objects[slv_Clean],
-slv_PurchaseOrders = slv_Clean[PurchaseOrders],
-slv_dimTables = Objects[slv_dimTables],
-slv_dimProducts = slv_dimTables[dimProducts],
-slv_factTables = Objects[slv_factTables],
-slv_factOrders = slv_factTables[factOrders],
+PurchaseOrders = Objects[prelimClean][PurchaseOrders],
+
+dimTables = Objects[dimTables],
+dimProducts = dimTables[dimProducts],
+factTables = Objects[slv_factTables],
+
+slv_factOrders = factTables[factOrders],
 
 Lists = [Objects][Lists],
 
@@ -24,7 +25,7 @@ filterList = Functions[filterList],
 
 Variables =
 [
-    lstColumns_PurchaseOrders = Table.ColumnNames(slv_PurchaseOrders),
+    lstColumns_PurchaseOrders = Table.ColumnNames(PurchaseOrders),
 
     lstKeyColumns_dimProducts = filterList(lstColumns_PurchaseOrders,{{"Product"},{"Price","Quantity","Hyperlink"}}),
     txtIdColumn_dimProducts = "Product Id",
