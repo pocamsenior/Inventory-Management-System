@@ -50,7 +50,7 @@ factOrders =
     #"Add Order Id" = Table.AddIndexColumn(#"Sort by Partition Year, Date, Product Id",txtIdColumn_factOrders, 1,1, Int64.Type),
     #"Filter Columns" = Table.SelectColumns(#"Add Order Id",lstColumns_factOrders),
     #"Update Data Types" = updateDataTypes(#"Filter Columns"),
-    #"Final Output" = #"Sort by Partition Year, Date, Product Id"
+    #"Final Output" = #"Update Data Types"
 ],
 
 // =====================================================================================
