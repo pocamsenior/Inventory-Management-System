@@ -39,6 +39,8 @@ Objects = (path) =>
 [
     // *.csv Files
     csv_PurchaseOrders = evalFolder(Text.Combine({path, csv,"Purchase Orders"})),
+    csv_InventoryChecks = evalFolder(Text.Combine({path, csv,"Inventory Checks"})),
+    csv_PurchaseRequests = evalFolder(Text.Combine({path, csv,"Purchase Requests"})),
 
     // Global Files
     Lists = evalFile(Text.Combine({path,Global,"0.2 Lists.m"})),

@@ -23,6 +23,7 @@ txtIdColumn_dimProducts = Variables[txtIdColumn_dimProducts],
 
 Functions = Objects[Functions],
 filterList = Functions[filterList],
+updateDataTypes = Functions[updateDataTypes],
 
 // Local Definitions
 // Aggregations
@@ -41,7 +42,8 @@ slv_dimProducts =
 [
     #"Aggregate Products" = Table.Group(slv_PurchaseOrders, lstKeyColumns_dimProducts, nlstTransformations_Aggregations),
     #"Add Product Id" = Table.AddIndexColumn(#"Aggregate Products",txtIdColumn_dimProducts, 1,1, Int64.Type),
-    #"Final Output" = #"Add Product Id"
+    #"Update Types" = updateDataTypes(#"Add Product Id"),
+    #"Final Output" = #"Update Types"
 ]
 
 in
