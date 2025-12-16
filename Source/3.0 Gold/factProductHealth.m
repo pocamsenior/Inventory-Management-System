@@ -20,7 +20,7 @@ reorderColumns = Functions[reorderColumns],
 fillMissingData = Functions[fillMissingData],
 
 #"Reorder Columns" = reorderColumns(factProductHealth,{1,3,null,2}),
-#"Fill Missing Data" = fillMissingData(#"Reorder Columns",{{"Product","Hyperlink","Comment"},{null}})
+#"Fill Missing Data" = fillMissingData(#"Reorder Columns",{{"Product","Hyperlink","Comment"},{"Id"}})
 
 in
 
