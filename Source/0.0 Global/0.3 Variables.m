@@ -11,14 +11,11 @@ let
 // Global Definitions
 Objects = #shared[Objects],
 PurchaseOrders = Objects[prelimClean][PurchaseOrders],
-
 dimTables = Objects[dimTables],
 dimProducts = dimTables[dimProducts],
 factTables = Objects[slv_factTables],
 
 slv_factOrders = factTables[factOrders],
-
-Lists = [Objects][Lists],
 
 Functions = Objects[Functions],
 filterList = Functions[filterList],

@@ -43,7 +43,6 @@ Objects = (path) =>
     csv_PurchaseRequests = evalFolder(Text.Combine({path, csv,"Purchase Requests"})),
 
     // Global Files
-    Lists = evalFile(Text.Combine({path,Global,"0.2 Lists.m"})),
     Variables = evalFile(Text.Combine({path, Global,"0.3 Variables.m"})),
     Functions = evalFile(Text.Combine({path, Global,"0.4 Functions.m"})),
 
@@ -52,9 +51,9 @@ Objects = (path) =>
     Extract = evalFile(Text.Combine({path, Bronze,"1.2 Extract.m"})),
 
     // Silver Layer
-    prelimClean = evalFile(Text.Combine({path, Silver,"2.1 Preliminary Clean.m"})),
-    dimTables = evalFile(Text.Combine({path, Silver,"2.2 dimTables.m"})),
-    factTables = evalFile(Text.Combine({path, Silver,"2.2 factTables.m"})),
+    prelimClean = evalFile(Text.Combine({path, Silver,"2.1 prelimClean.m"})),
+    deepClean_dimTables = evalFile(Text.Combine({path, Silver,"2.2 deepClean_dimTables.m"})),
+    deepClean_factTables = evalFile(Text.Combine({path, Silver,"2.2 deepClean_factTables.m"})),
 
     // Gold Layer
     dimProducts = evalFile(Text.Combine({path, Gold,"dimProducts.m"})),

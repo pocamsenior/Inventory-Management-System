@@ -14,10 +14,8 @@ Objects = #shared[Objects],
 PurchaseOrders = Objects[prelimClean][PurchaseOrders],
 InventoryChecks = Objects[prelimClean][InventoryChecks],
 PurchaseRequests = Objects[prelimClean][PurchaseRequests],
-dimTables = Objects[dimTables],
+dimTables = Objects[deepClean_dimTables],
 dimProducts = dimTables[dimProducts],
-
-Lists = [Objects][Lists],
 
 Variables = Objects[Variables],
 lstKeyColumns_dimProducts = Variables[lstKeyColumns_dimProducts],
@@ -29,8 +27,6 @@ updateDataTypes = Functions[updateDataTypes],
 
 // Local Definitions
 lstColumns_factOrders = filterList(Table.ColumnNames(factOrders[Add Order Id]), {{"Order","Id","Quantity","Date","Price"},{null}}),
-lstColumns_factProductHealth = filterList(Table.ColumnNames(factProductHealth[Fill Missing Data]), {{"Date","Health","Consumed","Comment","Type","Total","Discarded","Id"},{"Hyperlink","Price"}}),
-txtColumn_EntryType = "Entry Type",
 
 sortYearDateProductId = (tbl) => 
     let
@@ -42,7 +38,7 @@ sortYearDateProductId = (tbl) =>
         else
         Table.Sort(tbl,{{"Partition Year",Order.Ascending},{"Date",Order.Ascending}}),
 
-// Tables
+// ============================== FACT ORDERS ======================================================
 factOrders =
 [
     #"Join dimProducts" = Table.Join(PurchaseOrders, lstKeyColumns_dimProducts, dimProducts, lstKeyColumns_dimProducts, JoinKind.Inner),
@@ -53,7 +49,10 @@ factOrders =
     #"Final Output" = #"Update Data Types"
 ],
 
-// =====================================================================================
+// ============================== FACT PRODUCT HEALTH ======================================================
+
+lstColumns_factProductHealth = filterList(Table.ColumnNames(factProductHealth[Fill Missing Data]), {{"Date","Health","Consumed","Comment","Type","Total","Discarded","Id"},{"Hyperlink","Price"}}),
+txtColumn_EntryType = "Entry Type",
 
 factProductHealth =
 [
@@ -101,7 +100,7 @@ factProductHealth =
     #"Final Output" = #"Filter Columns"
 ],
 
-// =====================================================================================
+// ============================== FACT PURCHASE REQUESTS ======================================================
 
 factPurchaseRequests =
 [

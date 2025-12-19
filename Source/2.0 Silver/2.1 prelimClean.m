@@ -4,9 +4,10 @@ Silver Layer - Preliminary Cleaning
 ===================================================
 # Script Definition
 This script performs a general preliminary cleaning of all tables from the bronze extract record
-1. Transform Blanks to Nulls
-2. Trim all data fields
-3. Update Data Types
+1. Partition Data into Years
+2. Transform Blanks to Nulls
+3. Trim all data fields
+4. Update Data Types
 ===================================================
 */
 
@@ -14,8 +15,6 @@ let
 // Global Definitions
 Objects = #shared[Objects],
 Extract = Objects[Extract],
-
-Lists = [Objects][Lists],
 
 Variables = Objects[Variables],
 

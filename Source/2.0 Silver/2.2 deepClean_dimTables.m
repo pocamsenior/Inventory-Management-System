@@ -13,8 +13,6 @@ let
 Objects = #shared[Objects],
 PurchaseOrders = Objects[prelimClean][PurchaseOrders],
 
-Lists = [Objects][Lists],
-
 Variables = Objects[Variables],
 lstColumns_PurchaseOrders = Variables[lstColumns_PurchaseOrders],
 lstKeyColumns_dimProducts = Variables[lstKeyColumns_dimProducts],
@@ -42,8 +40,7 @@ dimProducts =
             Table.Group(PurchaseOrders, lstKeyColumns_dimProducts, nlstTransformations_Aggregations),
 
     #"Add Product Id" = Table.AddIndexColumn(#"Aggregate Products",txtIdColumn_dimProducts, 1,1, Int64.Type),
-    #"Update Types" = updateDataTypes(#"Add Product Id"),
-    #"Final Output" = #"Update Types"
+    #"Final Output" = #"Add Product Id"
 ]
 
 in

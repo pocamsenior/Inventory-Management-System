@@ -11,8 +11,7 @@ let
 
 // Global Definitions
 Objects = #shared[Objects],
-factTables = Objects[factTables],
-factPurchaseRequests = factTables[factPurchaseRequests],
+factPurchaseRequests = Objects[deepClean_factTables][factPurchaseRequests],
 
 Functions = Objects[Functions],
 filterList = Functions[filterList],

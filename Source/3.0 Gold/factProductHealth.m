@@ -11,11 +11,9 @@ let
 
 // Global Definitions
 Objects = #shared[Objects],
-factTables = Objects[factTables],
-factProductHealth = factTables[factProductHealth],
+factProductHealth = Objects[deepClean_factTables][factProductHealth],
 
 Functions = Objects[Functions],
-filterList = Functions[filterList],
 reorderColumns = Functions[reorderColumns],
 fillMissingData = Functions[fillMissingData],
 

@@ -96,7 +96,7 @@ Functions =
                 each (value) => value ?? _),
             nlstTransformations = List.Zip({lstColumns_Null,lstFunctions_Null})
         in
-            Table.TransformColumns(tbl, nlstTransformations)
+            updateDataTypes(Table.TransformColumns(tbl, nlstTransformations))
 ]
 in
     Functions

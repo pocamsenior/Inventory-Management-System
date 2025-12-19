@@ -11,11 +11,9 @@ let
 
 // Global Definitions
 Objects = #shared[Objects],
-dimTables = Objects[dimTables],
-dimProducts = dimTables[dimProducts],
+dimProducts = Objects[deepClean_dimTables][dimProducts],
 
 Functions = Objects[Functions],
-filterList = Functions[filterList],
 reorderColumns = Functions[reorderColumns],
 fillMissingData = Functions[fillMissingData],
 

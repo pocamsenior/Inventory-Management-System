@@ -10,15 +10,11 @@ This script creates a combined record for all csv files in the data folder
 let
 // Global Definitions
 Objects = #shared[Objects],
-// Files
 csv_PurchaseOrders = Objects[csv_PurchaseOrders],
 csv_InventoryChecks = Objects[csv_InventoryChecks],
 csv_PurchaseRequests = Objects[csv_PurchaseRequests],
 
-Lists = [Objects][Lists],
-
 Variables = Objects[Variables],
-
 Functions = Objects[Functions],
 
 // Local Definitions
