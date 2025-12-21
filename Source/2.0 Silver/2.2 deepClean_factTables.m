@@ -20,6 +20,7 @@ dimProducts = dimTables[dimProducts],
 Variables = Objects[Variables],
 lstKeyColumns_dimProducts = Variables[lstKeyColumns_dimProducts],
 txtIdColumn_factOrders = Variables[txtIdColumn_factOrders],
+txtIdColumn_factProductHealth = "Health Id",
 
 Functions = Objects[Functions],
 filterList = Functions[filterList],
@@ -97,7 +98,9 @@ factProductHealth =
 
     #"Filter Columns" = Table.SelectColumns(#"Sort by Partition Year, Date, Product Id",lstColumns_factProductHealth),
 
-    #"Final Output" = #"Filter Columns"
+    #"Add Health Id" = Table.AddIndexColumn(#"Filter Columns",txtIdColumn_factProductHealth, 1,1, Int64.Type),
+
+    #"Final Output" = #"Add Health Id"
 ],
 
 // ============================== FACT PURCHASE REQUESTS ======================================================
